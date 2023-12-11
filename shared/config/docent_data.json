@@ -1,0 +1,68 @@
+{
+    "screens": [
+      {
+        "name": "screen 1",
+        "id": "screen1",
+        "topics": [
+          {
+            "name": "topic1",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png" ]
+          },
+          {
+            "name": "topic2",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png" ]
+          },
+          {
+            "name": "topic3",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png", "placeholder.png" ]
+          },                {
+            "name": "topic4",
+            "slides": ["placeholder.png", "placeholder.png" ]
+          }
+        ]
+      },
+      {
+        "name": "screen 2",
+        "id": "screen2",
+        "topics": [
+          {
+            "name": "topic1",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png", "placeholder.png" ]
+          },
+          {
+            "name": "topic2",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png" ]
+          },
+          {
+            "name": "topic3",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png", "placeholder.png", "placeholder.png" ]
+          },                {
+            "name": "topic4",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png" ]
+          }
+        ]
+      },
+      {
+        "name": "screen 3",
+        "id": "screen3",
+        "topics": [
+          {
+            "name": "topic1",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png" ]
+          },
+          {
+            "name": "topic2",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png" ]
+          },
+          {
+            "name": "topic3",
+            "slides": ["placeholder.png","placeholder.png","placeholder.png", "placeholder.png", "placeholder.png" ]
+          },                {
+            "name": "topic4",
+            "slides": ["placeholder.png", "placeholder.png", "placeholder.png" ]
+          }
+        ]
+      }
+
+    ]
+}

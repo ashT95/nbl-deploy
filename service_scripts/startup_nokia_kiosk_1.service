@@ -1,0 +1,26 @@
+
+#read http://nodesource.com/blog/running-your-node-js-app-with-systemd-part-1/
+#for install instructions
+
+[Unit]
+Description=Nokia interactive chrome experience (Touch Screen)
+After=touchnodeserver.service
+
+
+
+[Service]
+Type=forking
+Environment=DISPLAY=:0
+User=nokia-touch-1
+PermissionsStartOnly=true
+#this is how you delay
+ExecStartPre=/bin/sleep 60
+#ExecStart=/usr/bin/google-chrome --kiosk --no-first-run http://fakelove.tv
+#ExecStart=/opt/google/chrome/google-chrome --kiosk --no-first-run --profile-directory=Default --app-id=afhcomalholahplbjhnmahkoekoijban http://localhost:3000/
+#ExecStart=/opt/google/chrome/google-chrome --kiosk --no-first-run --profile-directory=Default --app-id=afhcomalholahplbjhnmahkoekoijban http://localhost:3001/
+WorkingDirectory=/usr/local/bin/nokia_bell_labs_deploy/service_scripts/
+ExecStart=/bin/bash start_kiosk.sh
+Restart=on-failure
+
+[Install]
+WantedBy=user@.service

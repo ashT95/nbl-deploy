@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nokia Bell Labs - OverhangScreen</title>
+</head>
+<body>
+
+<div>
+  <div>
+
+  </div>
+  <div >
+    <b>Sensor</b>
+    <div id="sensor_value">
+      <div>
+        touchtable 1:
+        <div id="touchtable_1">
+        </div>
+      </div>
+      <div>
+        touchtable 2:
+        <div id="touchtable_2">
+        </div>
+      </div>
+      <div>
+        touchtable 3:
+        <div id="touchtable_3">
+        </div>
+      </div>
+      <div id="touchtable_gene"><!-- hm? -->
+      </div>
+    </div>
+  </div>
+  <div>
+    <b>Logs</b>
+  </div>
+  <div>
+    <textarea id="textlog" rows="10" cols="60"></textarea>
+  </div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+  const socket = io('/overhang',{
+    'reconnection': true,
+    'reconnectionDelay': 500,
+    'reconnectionAttempts': Infinity
+  });
+
+  // joins overhang server's room
+  socket.on('connect', function (){
+    console.log('[log] connected, join room');
+    socket.emit('room',{t_name:'web view',room:'overhangclient_room'});
+  });
+
+  // got message to log
+  socket.on('console', function(data){
+    switch(data.msg.cmd) {
+      case "wakeup": {
+        // do something on wakeup?
+        break;
+      }
+      case "start_docent": {
+        // change to docent mode
+        break;
+      }
+      case "stop_docent": {
+        // stop docent mode
+        break;
+      }
+      case "set_topic": {
+        if (currentScreen == -1) {
+          currentScreen = data.t_name;
+          setTimeout(resetScreenControl, 60000 * 3)
+        }
+        if (currentScreen == data.t_name) {
+          // show the correct topic on overhang.
+
+          addToTextarea(data.t_name + ": " + data.msg);
+        }
+        else {
+        // do nothing, received a message from a screen not in control
+        }
+      }
+      case "docent_slide": {
+        // show docent slide data.slidId
+        break;
+
+      }
+      default: {
+        console.log(("[in(" + data.t_name + ")]" + data.msg));
+        //code block
+      }
+    }
+  })
+
+  socket.on('sensor', function(data){
+    var log = "[s_msg("+data.t_name+")] state:"+data.sensor;
+    document.getElementById(data.t_name).innerHTML = log;
+  })
+
+  function resetScreenControl() {
+    currentScreen = -1;
+  }
+
+  function addToTextarea(text){
+    console.log(text);
+    document.getElementById("textlog").value += text +"\n";
+    document.getElementById("textlog").scrollTop = document.getElementById("textlog").scrollHeight;
+  }
+
+</script>
+</body>
+</html>

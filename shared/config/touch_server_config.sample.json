@@ -1,0 +1,6 @@
+{
+  "_comments": "serverport is where Express runs.\nname determines the key in `content.json` from which the screen parses its content, as well as its Socket name; typically touchtable_[num].\noverhangip is the address of the overhang server.",
+  "serverport": 3001,
+  "name": "touchtable_noname",
+  "overhangip": "http://172.16.1.179:3000"
+}

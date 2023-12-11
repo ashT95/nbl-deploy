@@ -1,0 +1,161 @@
+@charset 'utf-8';
+
+* {
+  box-sizing: border-box;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  //transform: rotate(180deg); // HypeBoxes are mounted upside down
+  //cursor: none;
+  //-webkit-user-select: none;
+  //user-select: none;
+
+  background: black;
+  color: white;
+  font-size: 24px;
+  font-family: NokiaPureHeadlineRegular;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+  // width: 100vw; // messes up particle canvas
+  // height: 100vh; // messes up particle canvas
+}
+
+.chapter-bar {
+  visibility: hidden; // unneccesary, but prevents flash before being overriden by chapterInit()
+  position: absolute;
+  width: 100%;
+  bottom: 60px;
+  padding: 0 90px;
+  //display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  * {
+    & + * { // why doesn't & + & work?
+      margin-left: 45px;
+    }
+    margin: 0;
+  }
+  .title {
+    // if text rather than animation
+    //color: @accentBlue;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    height: 1.2em;
+    font-family:NokiaPureHeadlineExtraBold;
+
+    max-height: 1.2em;
+    align-items: center; // center anim in normal-size container
+    overflow: visible;
+    margin: 0;
+
+    background: -webkit-linear-gradient(@accentBlue, @darkerAccentBlue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    .particle-anim {
+      // these props may need to be written in to content.json
+      width: 806px;
+      height: 226px;
+      //margin-bottom: 22px; // correction for slightly high text position
+    }
+  }
+  .intro {
+    font-size: 24px;
+    line-height: 30px;
+    padding-left: 45px;
+    border-left: 5px solid white;
+    padding-top: .5em;
+    padding-bottom: .5em;
+  }
+  a.topic {
+    visiblility: hidden; // unneccesary, but prevents flash before being overriden by topicFloaterInit()
+    // needs to always be 2 lines; tough challenge
+    font-family: NokiaPureHeadlineExtraBold;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 24px;
+    max-width: 130px;
+    &.active {
+      color: @accentBlue;
+    }
+  }
+}
+
+body:not([data-state=topic-active]) {
+  .chapter-bar a.topic {
+    display: none;
+  }
+}
+
+body[data-state=topic-active] {
+  .chapter-bar .intro {
+    display: none;
+  }
+}
+
+a.topic.float {
+  text-transform: uppercase;
+  position: absolute;
+  font-family: NokiaPureHeadlineExtraBold;
+  font-size: 26px;
+  letter-spacing: .2em;
+  animation: orbit 8s linear infinite;
+  text-align: center;
+  max-width:430px;
+  // max-width: 12em; // break into lines
+  &::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    margin: 0 auto 1em; // margin-bottom overridden in animations.js
+    display: block;
+    border-radius: 50%;
+    border: 10px solid rgba(0,201,255, 0.7);
+    position: relative;
+    animation: pulse 2s ease-out infinite alternate-reverse;
+  }
+}
+
+// .contentsbox imported separately
+
+.aperture {
+  visibility: visible !important;
+  position: absolute;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.aperture-label {
+  position: absolute;
+  padding: 20px; // avoid aperture edges
+
+  font-family: NokiaPureHeadlineBold;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: .1em;
+
+  color: black;
+  transform: translateX(-50%) translateY(-50%) translateY(60px); // center on aperture, then move down 60px
+}
+
+.aperture:not(.open) + .aperture-label {
+  visibility: hidden;
+}
+
+
+
+// TEMP & DEBUGGING
+
+// body {
+//   transform: none !important;
+//   cursor: crosshair !important;
+// }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+  <!-- load shaders-->
+    <script src="fl_custom_particle_system/shaders/shared_vert.js"></script>
+    <script src="fl_custom_particle_system/shaders/ps_03_feedback_frag.js"></script>
+    <script src="fl_custom_particle_system/shaders/ps_03_master_frag.js"></script>
+    <script src="fl_custom_particle_system/shaders/ps_03_master_vert.js"></script>
+    <script src="fl_custom_particle_system/shaders/ps_03_standard_frag.js"></script>
+    <script src="fl_custom_particle_system/shaders/ps_03_vel_frag.js"></script>
+    <script src="fl_custom_particle_system/shaders/aperture_master_vert.js"></script>
+    <script src="fl_custom_particle_system/shaders/aperture_master_frag.js"></script>
+    <script src="fl_custom_particle_system/shaders/aperture_master_points_frag.js"></script>
+    <script src="fl_custom_particle_system/lib/three.min.js"></script>
+    <script src="fl_custom_particle_system/js/shared_renderer.js"></script>
+    <script src="fl_custom_particle_system/js/ps_03.js"></script>
+    <script src="fl_custom_particle_system/js/aperture.js"></script>
+
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+
+</head>
+<body data-state="welcome" data-activated="">
+  <div class="trigger-instruction">Touch screen to begin</div>
+  <header class="chapter-bar">
+      <div>
+          {{#each topics}}
+              <a class="topic" data-activates="{{topicId}}">{{title}}</a>
+          {{/each}}
+      </div>
+        <h1 class="title">
+          {{#if titleSprite}}
+            <div class="particle-anim" data-src="{{titleSprite}}" alt="{{title}}" style="background: url('{{titleSprite}}') left center;"></div>
+          {{else}}
+            <span class="title-text">{{title}}</span>
+          {{/if}}
+        </h1>
+
+  </header>
+  {{#each topics}}
+    <a class="topic float"
+       id="topic-{{topicId}}"
+       data-activates="{{topicId}}"
+       style="left: {{artifact.[0].loc.x}}px; top: {{artifact.[0].loc.y}}px;">{{title}}</a>
+    {{> infobox }}
+    {{#each artifact}}
+      {{#if show}}
+        {{!TODO: `.aperture`s may no longer be necessary, with apertures now rendered in canvas}}
+          <div class="aperture"
+               data-for="{{../topicId}}"
+               data-diameter="{{loc.d}}"
+               data-x="{{loc.x}}"
+               data-y="{{loc.y}}">
+          </div>
+          <label class="aperture-label"
+                 data-for="{{../topicId}}"
+                 data-aperture-diam="{{loc.d}}"
+                 {{! math to position 40px above aperture bottom ?}}
+                 style="left: {{loc.x}}px;
+                        top: {{loc.y}}px;
+                        max-width: {{loc.d}}px;
+                        max-height: {{loc.d}}px;">
+            {{{caption}}}
+          </label>
+      {{/if}}
+    {{/each}}
+  {{/each}}
+  <script src="index-browserified.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+// everything the data-state=docent-mode touches will be yours
+// otherwise inherit from touch_interface.less
+body[data-state=docent-mode] {
+  * {
+    // redundant with touch_interface.less, but good to have in case we separate
+    box-sizing: border-box;
+    background-color: #000;
+    color: #fff;
+  }
+
+  .docent-box {
+    width: 70%;
+    border: solid 1px #808080;
+    margin: 0 auto;
+    padding: 10px 40px;
+    margin-top:300px;
+
+  }
+  .thumbnail {
+    margin:3px;
+    border: 6px solid #000;
+    box-shadow: 0 0 10px #000;
+    max-height:65px;
+    width:auto;
+  }
+  .selected {
+    border: 6px solid @accentBlue;
+    box-shadow: 0 0 10px  lighten(@accentBlue, 30%);
+  }
+
+  .screen-link {
+    font-family: NokiaPureHeadlineBold;
+    margin: 10px 0;
+    font-size: 20pt;
+    line-height: 24pt;
+    letter-spacing:0.1em;
+    color: #ffffff;
+
+  }
+
+  .screen-link.selected-screen {
+    font-weight: bold;
+    color:@accentBlue;
+  }
+
+  .screen {
+    display: none;
+
+  }
+
+  .screen.selected-screen {
+    display: block;
+
+  }
+
+  /* Create two unequal columns that floats next to each other */
+  .column {
+    float: left;
+  }
+
+  .left {
+    width: 25%;
+  }
+
+  .right {
+    width: 75%;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .close-button {
+    float:right;
+    font-size:2.5em;
+    color:#808080;
+  }
+
+  .navigation-arrows {
+    position:relative;
+    margin-left:10px;
+    color:#808080;
+
+  }
+
+  .topic-name {
+    font-family: NokiaPureHeadlineExtraBold;
+    font-size: 14pt;
+    line-height: 14pt;
+    letter-spacing:0.2em;
+    color: #ffffff;
+    margin-left:10px;
+    margin-bottom: 10px;
+  }
+
+
+  .arrow {
+    border: solid 1.2px #808080;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    height: 20px;
+    width: 20px;
+    display:inline-block;
+    margin: 10px;
+  }
+
+  .right-arrow {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+
+  .left-arrow {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+
+}

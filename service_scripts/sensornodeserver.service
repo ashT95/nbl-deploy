@@ -1,0 +1,17 @@
+[Unit]
+Description=Sensor Node.js server
+#Requires= nothing right now
+
+[Service]
+ExecStart=/usr/bin/node /usr/local/bin/nokia_bell_labs_deploy/touch_table/sensor_server/sensor_app.js
+# if crashed or hanging restart after 10sec
+Restart=always
+RestartSec=10
+# sd_notify required repeatedly else its a crash, wait 10sec for until considered hannging
+Type=notify
+WatchdogSec=10
+# wait 30sec before starting
+TimeoutStartSec=30
+
+[Install]
+WantedBy=multi-user.target

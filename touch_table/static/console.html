@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nokia Bell Labs - TouchTable</title>
+</head>
+<body>
+
+<div>
+    <div id="text">
+    </div>
+    <div id="OverhangScreen client">
+        <div id="overhang_status">
+            <b>Message to OverhangScreen Server</b>
+        </div>
+        <div>
+            <input id="b_msg" type="text" value=""/>
+            <button onClick="b_msg()">send Broadcast Message</button>
+        </div>
+        <div>
+            <input id="d_msg" type="text" value=""/>
+            <button onClick="d_msg()"> send Direct Message</button>
+        </div>
+        <div >
+            <b>Sensor</b>
+            <div id="sensor_value">
+
+            </div>
+        </div>
+        <div>
+            <b>Logs</b>
+        </div>
+        <div>
+            <textarea id="textlog" rows="10" cols="60"></textarea>
+        </div>
+
+
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    const socket = io('/touch',{
+        'reconnection': true,
+        'reconnectionDelay': 500,
+        'reconnectionAttempts': Infinity
+    });
+
+    // join touchclient room
+    socket.on('connect', function(){
+        socket.emit('room','touchclient_room');
+    });
+
+
+
+    // call back for receiving sensor data message
+    var sensor_state = "not_connected"
+    socket.on('sensor_data',function(data){
+        if( escape(sensor_state) != escape(data.state)){
+            addToTextarea("[Sensor] "+sensor_state+"->"+data.state);
+            sensor_state = data.state;
+
+        }
+        document.getElementById("sensor_value").innerHTML = "State: "+data.state+", Distance: "+data.distance;
+    });
+
+    // call back for receiving broadcast message.
+    socket.on('b_msg',function(data){
+        addToTextarea(("[in("+data.t_name+")]"+data.msg));
+    });
+
+    // updates conosole logs
+    function addToTextarea(text){
+        console.log(text);
+        document.getElementById("textlog").value += text +"\n";
+        document.getElementById("textlog").scrollTop = document.getElementById("textlog").scrollHeight;
+    }
+
+
+
+
+
+
+
+
+
+
+    // local function to send broadcast message
+    function b_msg() {
+        var mymsg = document.getElementById("b_msg").value;
+        addToTextarea("[out_b]"+mymsg);
+        socket.emit('b_msg', {msg: mymsg});
+
+    }
+
+    // local function to send direct message
+    function d_msg() {
+        var mymsg = document.getElementById("d_msg").value;
+        addToTextarea("[out_d]"+mymsg)
+        socket.emit('d_msg', {msg: mymsg});
+    }
+
+</script>
+</body>
+</html>

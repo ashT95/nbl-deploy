@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body data-state="docent-mode">
+<div class="docent-box">
+
+    <div class="row">
+        <div class="close-button"> &times; </div>
+    </div>
+
+
+    <div class="row slides-matrix">
+
+
+        <div class="column left">
+            <div class="screens">
+                {{#each screens}}
+                    <div class="screen-link" id="screen-link-{{@index}}">
+                        {{title}}
+                    </div>
+                {{/each}}
+
+            </div>
+        </div>
+
+        <div class="column right">
+            <div>
+            {{#each screens}}
+                <div class="screen" id="screen-{{@index}}">
+                    {{#each topics}}
+                        <div class="chapter chapter-{{topicId}}">
+                            <div class="topic-name">{{title}}</div>
+                                {{#with deepDive}}
+                                    {{#each columns}}
+                                        {{#each item}}
+                                            {{#if figure}}
+                                                {{#with figure}}
+                                                    <img src="{{src}}" width="150px"
+                                                         class="thumbnail"
+                                                         id="img-{{@../../../index}}-{{@../../index}}-{{@index}}"
+                                                         data-image="{{src}}"
+                                                    />
+                                                {{/with}}
+                                                {{/if}}
+                                        {{/each}}
+                                    {{/each}}
+
+
+                                {{/with}}
+                        </div>
+                    {{/each}}
+                </div>
+            {{/each}}
+            </div>
+
+
+            <div class="navigation-arrows">
+                <p class="arrow left-arrow"></p>
+                <p class="arrow right-arrow"></p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="docent-browserified.js"></script>
+</body>
+</html>

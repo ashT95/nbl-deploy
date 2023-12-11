@@ -1,0 +1,23 @@
+
+// SHARED STYLES
+.trigger-instruction {
+  color: #fff;
+  font-family: NokiaPureHeadlineBold;
+  text-transform: uppercase;
+  font-size: 48px;
+  letter-spacing: 0.2em;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  text-shadow: 0 0 1em #000;
+  transition: 2s opacity ease;
+  animation: floating 18s infinite linear;
+}
+
+.trigger-instruction.hidden {
+  opacity:0;
+}

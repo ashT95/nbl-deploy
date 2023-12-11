@@ -1,0 +1,39 @@
+<article class="topic contentsbox" data-for="{{topicId}}" style="left: {{contentsBox.topLeftLoc.x}}px; top: {{contentsBox.topLeftLoc.y}}px;">
+  <div class="column intro">
+    <h1 class="title">{{title}}</h1>
+    <p class="description">{{intro}}</p>
+  </div>
+  {{#with deepDive}}
+    <div class="column deepdive scroll-pane">
+      {{#each columns}}
+        <div class="column">
+          {{#each item}}
+            {{#if text}}
+              <p>{{text}}</p>
+            {{/if}}
+            {{#if figure}}
+              {{#with figure}}
+                <figure>
+                  <img src="{{src}}">
+                  <figcaption>{{caption}}</figcaption>
+                </figure>
+              {{/with}}
+            {{/if}}
+            {{#if video}}
+              {{#with video}}
+                <figure>
+                  <video controls loop muted>
+                    <source src="{{src}}" type="video/mp4">
+                  </video>
+                  <figcaption>{{caption}}</figcaption>
+                </figure>
+              {{/with}}
+            {{/if}}
+            </br>
+          {{/each}}
+        </div>
+      {{/each}}
+    </div>
+  {{/with}}
+  <div class="close" data-closes="{{topicId}}">×</div>
+</article>
